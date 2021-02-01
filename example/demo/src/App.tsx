@@ -10,8 +10,9 @@ import { Col } from "antd";
 // @eslint-ignore
 import openings from "./openings.ts";
 
-import undo from "./images/undo-4-32.png";
-import rewind from "./images/rewind-32.png";
+import back from "./images/back.svg";
+import restart from "./images/restart.svg";
+
 import MoveBox from "./components/MoveBox";
 import { move } from "chessground/drag";
 import { Drawable, DrawShape } from "chessground/draw";
@@ -152,10 +153,10 @@ const Demo = () => {
         <div className="opening-name">{currentOpeningName}</div>
         <div className="buttons">
           <button onClick={onResetClick} disabled={buttonsDisabled}>
-            <img src={rewind}></img>
+            <img className="nav-button" src={restart}></img>
           </button>
           <button onClick={onBackClick} disabled={buttonsDisabled}>
-            <img src={undo}></img>
+            <img className="nav-button" src={back}></img>
           </button>
         </div>
       </Col>
