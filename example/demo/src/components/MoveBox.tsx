@@ -1,6 +1,5 @@
 import { Move } from "chess.js";
-import React from "react";
-
+import React, { CSSProperties } from "react";
 interface MoveBoxProps {
   name: string;
   move: Move;
@@ -10,7 +9,11 @@ interface MoveBoxProps {
 const MoveBox = ({ name, move, onMouseEnter }: MoveBoxProps) => {
   return (
     <div className="move-box" onMouseEnter={() => onMouseEnter(move)}>
-      {name}
+      <div>{name}</div>
+      <div>
+        <b>Move: </b>
+        {move.san}
+      </div>
     </div>
   );
 };
