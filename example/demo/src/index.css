@@ -40,6 +40,14 @@ button {
   grid-gap: 20px;
 }
 
+.move-box-container {
+  width: 250px;
+  overflow-y: auto;
+  top: 10vh;
+  padding-left: 20px;
+  height: 89.95vh;
+}
+
 .move-box {
   margin-top: 10px;
   width: 200px;

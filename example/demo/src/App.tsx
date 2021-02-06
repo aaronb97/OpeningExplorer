@@ -138,7 +138,7 @@ const Demo = () => {
   return (
     <div style={{ height: "100vh" }}>
       <Col span={6} />
-      <Col span={12} style={{ top: "10%" }}>
+      <Col span={12} style={{ top: "10vh" }}>
         <Chessground
           width="50vw"
           height="50vw"
@@ -161,15 +161,7 @@ const Demo = () => {
         </div>
       </Col>
       <Col span={6} />
-      <Col
-        style={{
-          top: "10%",
-          paddingLeft: 20,
-          overflowY: "scroll",
-          height: "50vw",
-        }}
-        span={6}
-      >
+      <Col className="move-box-container" span={6}>
         <div>
           {cards.map((card, i) => (
             <MoveBox
