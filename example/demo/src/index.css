@@ -2,12 +2,12 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: white;
+  background-color: rgb(234, 232, 230);
   color: black;
 }
 
 button {
-  background-color: transparent;
+  background-color: white;
   margin-left: 1vmin;
   margin-right: 1vmin;
   transition: background-color 0.5s;
@@ -62,6 +62,7 @@ button {
   border-radius: 5px;
   padding: 5px;
   transition: background-color 0.5s;
+  background-color: white;
 }
 
 .move-box:hover {
