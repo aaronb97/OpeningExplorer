@@ -20,7 +20,7 @@ button {
 }
 
 .opening-name {
-  font-size: calc(10px + 3vmin);
+  font-size: calc(7px + 3vmin);
   display: flex;
   align-items: center;
   justify-content: center;
