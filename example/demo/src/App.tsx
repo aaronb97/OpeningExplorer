@@ -6,7 +6,6 @@ import "./index.css";
 //@ts-ignore
 import Chessground from "react-chessground";
 import "react-chessground/dist/styles/chessground.css";
-import { Col } from "antd";
 // @eslint-ignore
 import openings from "./openings.ts";
 
@@ -14,7 +13,6 @@ import back from "./images/back.svg";
 import restart from "./images/restart.svg";
 
 import MoveBox from "./components/MoveBox";
-import { move } from "chessground/drag";
 import { Drawable, DrawShape } from "chessground/draw";
 
 //import MoveBox from "./components/MoveBox";
@@ -136,18 +134,22 @@ const Demo = () => {
   };
 
   return (
-    <div style={{ height: "100vh" }}>
-      <Col span={6} />
-      <Col span={12} style={{ top: "10vh" }}>
+    <div className="grid-container">
+      <div />
+      <div>
         <Chessground
-          width="50vw"
-          height="50vw"
           turnColor={turnColor()}
           movable={calcMovable()}
           lastMove={lastMove}
           fen={fen}
           onMove={onMove}
-          style={{ margin: "auto" }}
+          style={{
+            margin: "auto",
+            width: "calc(80vmin - 100px)",
+            minWidth: "300px",
+            minHeight: "300px",
+            height: "calc(80vmin - 100px)",
+          }}
           drawable={drawable}
         />
         <div className="opening-name">{currentOpeningName}</div>
@@ -159,9 +161,8 @@ const Demo = () => {
             <img className="nav-button" src={back}></img>
           </button>
         </div>
-      </Col>
-      <Col span={6} />
-      <Col className="move-box-container" span={6}>
+      </div>
+      <div className="move-box-container">
         <div>
           {cards.map((card, i) => (
             <MoveBox
@@ -172,7 +173,7 @@ const Demo = () => {
             ></MoveBox>
           ))}
         </div>
-      </Col>
+      </div>
     </div>
   );
 };
