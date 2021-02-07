@@ -1,0 +1,15 @@
+diff --git a/node_modules/react-chessground/es/chessground.js b/node_modules/react-chessground/es/chessground.js
+index 0c14850..f1ae3e0 100644
+--- a/node_modules/react-chessground/es/chessground.js
++++ b/node_modules/react-chessground/es/chessground.js
+@@ -52,6 +52,10 @@ function (_React$Component) {
+   };
+ 
+   _proto.render = function render() {
++    if (this.cg && this.props.drawable && this.props.drawable.autoShapes) {
++      this.cg.setAutoShapes(this.props.drawable.autoShapes);
++    }
++
+     var _this = this;
+ 
+     var props = {
