@@ -145,10 +145,10 @@ const Demo = () => {
           onMove={onMove}
           style={{
             margin: "auto",
-            width: "calc(80vmin - 100px)",
+            width: "calc(85vmin - 100px)",
             minWidth: "300px",
             minHeight: "300px",
-            height: "calc(80vmin - 100px)",
+            height: "calc(85vmin - 100px)",
           }}
           drawable={drawable}
         />
