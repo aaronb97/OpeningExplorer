@@ -1,1 +1,3 @@
-module.exports = require("./chessground");
+import App from "./App.tsx";
+
+export default App;
