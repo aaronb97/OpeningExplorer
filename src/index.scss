@@ -1,9 +1,13 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   background-color: rgb(234, 232, 230);
   color: black;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
 }
 
 button {
@@ -24,7 +28,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 2vmin;
+  margin-top: 1vmin;
+  margin-bottom: 1vmin;
   height: 5vmin;
 }
 
@@ -35,7 +40,6 @@ button {
 }
 
 .grid-container {
-  padding-top: 100px;
   display: grid;
   grid-template-columns: 3fr 3fr 200px 2fr;
   grid-gap: 1x;
@@ -47,7 +51,7 @@ button {
   min-width: 180px;
   overflow-y: auto;
   padding-left: 20px;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 80px);
   align-items: center;
 }
 

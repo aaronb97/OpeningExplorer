@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Chess, { ChessInstance, Move, Square } from "chess.js";
-import "./index.css";
+import "./index.scss";
 
 //@ts-ignore
 import Chessground from "react-chessground";
@@ -14,6 +14,7 @@ import restart from "./images/restart.svg";
 
 import MoveBox from "./components/MoveBox";
 import { Drawable, DrawShape } from "chessground/draw";
+import { CustomNavBar } from "./components/CustomNavBar";
 
 //import MoveBox from "./components/MoveBox";
 const startingFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
@@ -134,47 +135,50 @@ const Demo = () => {
   };
 
   return (
-    <div className="grid-container">
-      <div />
-      <div>
-        <Chessground
-          turnColor={turnColor()}
-          movable={calcMovable()}
-          lastMove={lastMove}
-          fen={fen}
-          onMove={onMove}
-          style={{
-            margin: "auto",
-            width: "calc(85vmin - 100px)",
-            minWidth: "300px",
-            minHeight: "300px",
-            height: "calc(85vmin - 100px)",
-          }}
-          drawable={drawable}
-        />
-        <div className="opening-name">{currentOpeningName}</div>
-        <div className="buttons">
-          <button onClick={onResetClick} disabled={buttonsDisabled}>
-            <img className="nav-button" src={restart}></img>
-          </button>
-          <button onClick={onBackClick} disabled={buttonsDisabled}>
-            <img className="nav-button" src={back}></img>
-          </button>
-        </div>
-      </div>
-      <div className="move-box-container">
+    <>
+      <CustomNavBar></CustomNavBar>
+      <div className="grid-container">
+        <div />
         <div>
-          {cards.map((card, i) => (
-            <MoveBox
-              key={i}
-              name={card.name}
-              move={card.move}
-              onMouseEnter={onCardMouseEnter}
-            ></MoveBox>
-          ))}
+          <Chessground
+            turnColor={turnColor()}
+            movable={calcMovable()}
+            lastMove={lastMove}
+            fen={fen}
+            onMove={onMove}
+            style={{
+              margin: "auto",
+              width: "calc(85vmin - 80px)",
+              minWidth: "300px",
+              minHeight: "300px",
+              height: "calc(85vmin - 80px)",
+            }}
+            drawable={drawable}
+          />
+          <div className="opening-name">{currentOpeningName}</div>
+          <div className="buttons">
+            <button onClick={onResetClick} disabled={buttonsDisabled}>
+              <img className="nav-button" src={restart}></img>
+            </button>
+            <button onClick={onBackClick} disabled={buttonsDisabled}>
+              <img className="nav-button" src={back}></img>
+            </button>
+          </div>
+        </div>
+        <div className="move-box-container">
+          <div>
+            {cards.map((card, i) => (
+              <MoveBox
+                key={i}
+                name={card.name}
+                move={card.move}
+                onMouseEnter={onCardMouseEnter}
+              ></MoveBox>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
