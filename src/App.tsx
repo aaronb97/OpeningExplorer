@@ -14,7 +14,7 @@ import restart from "./images/restart.svg";
 
 import MoveBox from "./components/MoveBox";
 import { Drawable, DrawShape } from "chessground/draw";
-import { CustomNavBar } from "./components/CustomNavBar";
+import { CustomNavBar } from "./components/customNavBar/CustomNavBar";
 
 //import MoveBox from "./components/MoveBox";
 const startingFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
