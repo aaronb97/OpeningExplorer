@@ -16,8 +16,18 @@ import MoveBox from "./components/MoveBox";
 import { Drawable } from "chessground/draw";
 import { CustomNavBar } from "./components/customNavBar/CustomNavBar";
 
-//import MoveBox from "./components/MoveBox";
 const startingFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+
+const baseDrawableArgs = {
+  shapes: [],
+  enabled: true,
+  visible: true,
+  defaultSnapToValidMove: true,
+  eraseOnClick: false,
+  brushes: {},
+  pieces: { baseUrl: "" },
+  prevSvgHash: "",
+};
 
 interface MoveCard {
   move: Move;
@@ -68,15 +78,9 @@ const Demo = () => {
 
   const setState = () => {
     setDrawable({
+      ...baseDrawableArgs,
       shapes: [],
       autoShapes: [],
-      enabled: true,
-      visible: true,
-      defaultSnapToValidMove: true,
-      eraseOnClick: false,
-      brushes: {},
-      pieces: { baseUrl: "" },
-      prevSvgHash: "",
     });
     setFen(chess.fen());
     setCards(getCards());
@@ -133,10 +137,9 @@ const Demo = () => {
   };
 
   const onCardMouseEnter = (move: Move) => {
-    //@ts-ignore
     setDrawable({
+      ...baseDrawableArgs,
       autoShapes: [{ orig: move.from, dest: move.to, brush: "green" }],
-      eraseOnClick: true,
     });
   };
 
