@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom";
 import Chess, { ChessInstance, Move, Square } from "chess.js";
 import "./index.scss";
 
@@ -29,7 +29,6 @@ const getTrimmedFen = (fen: string) => {
 };
 
 const Demo = () => {
-  // @ts-ignore
   const [chess] = useState<ChessInstance>(new Chess());
   const [fen, setFen] = useState("");
   const [lastMove, setLastMove] = useState<Square[]>();
