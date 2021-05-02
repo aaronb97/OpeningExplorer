@@ -6,14 +6,13 @@ import "./index.scss";
 //@ts-ignore
 import Chessground from "react-chessground";
 import "react-chessground/dist/styles/chessground.css";
-// @eslint-ignore
-import openings from "./openings.ts";
+import openings from "./openings";
 
 import back from "./images/back.svg";
 import restart from "./images/restart.svg";
 
 import MoveBox from "./components/MoveBox";
-import { Drawable, DrawShape } from "chessground/draw";
+import { Drawable } from "chessground/draw";
 import { CustomNavBar } from "./components/customNavBar/CustomNavBar";
 
 //import MoveBox from "./components/MoveBox";
@@ -37,7 +36,7 @@ const Demo = () => {
   const [cards, setCards] = useState<MoveCard[]>([]);
   const [currentOpeningName, setCurrentOpeningName] = useState("");
   const [buttonsDisabled, setButtonsDisabled] = useState(true);
-  const [drawable, setDrawable] = useState<Drawable>({});
+  const [drawable, setDrawable] = useState<Drawable>({} as Drawable);
 
   useEffect(() => {
     setCards(getCards());
@@ -49,7 +48,7 @@ const Demo = () => {
       const possibleMove = chess.move(move);
       const trimmedFen = getTrimmedFen(chess.fen());
       const opening = openings[trimmedFen];
-      if (opening) {
+      if (opening && possibleMove) {
         cards.push({
           move: possibleMove,
           name: opening.name,
@@ -71,6 +70,13 @@ const Demo = () => {
     setDrawable({
       shapes: [],
       autoShapes: [],
+      enabled: true,
+      visible: true,
+      defaultSnapToValidMove: true,
+      eraseOnClick: false,
+      brushes: {},
+      pieces: { baseUrl: "" },
+      prevSvgHash: "",
     });
     setFen(chess.fen());
     setCards(getCards());
