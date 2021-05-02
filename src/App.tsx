@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import * as React from "react";
+import { useEffect, useState } from "react";
 import * as ReactDOM from "react-dom";
-import Chess, { ChessInstance, Move, Square } from "chess.js";
+import { Chess, ChessInstance, Move, Square } from "chess.js";
 import "./index.scss";
 
 //@ts-ignore
