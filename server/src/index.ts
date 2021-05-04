@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 
 import { Chess } from "chess.js";
 import openings from "./openings";
@@ -11,7 +10,8 @@ require("source-map-support").install();
 const app = express();
 
 app.use(cors({ origin: "http://localhost:3000" }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const getTrimmedFen = (fen: string) => {
   const splitFen = fen.split(" ");
