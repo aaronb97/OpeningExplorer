@@ -20,19 +20,25 @@ module.exports = {
     es6: true,
     commonjs: true,
   },
-  plugins: ["react"],
-  extends: ["eslint:recommended", "plugin:react/recommended"],
+  plugins: ['react', 'css-modules'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'airbnb',
+    'prettier',
+    'plugin:css-modules/recommended',
+  ],
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       node: {
-        paths: ["./"],
+        paths: ['src'],
       },
     },
   },
-  parser: "babel-eslint",
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 6,
-    sourceType: "module",
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
       experimentalObjectRestSpread: true,
@@ -40,27 +46,23 @@ module.exports = {
     },
   },
   rules: {
-    "no-console": [
-      "error",
+    'no-console': [
+      'error',
       {
-        allow: ["warn", "error", "info"],
+        allow: ['warn', 'error', 'info'],
       },
     ],
-    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx", "tsx"] }],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', 'tsx'] }],
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
   },
-  plugins: [
-    "css-modules",
-    "prettier",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
-  ],
-  extends: ["airbnb", "prettier", "plugin:css-modules/recommended"],
-  overrides: {
-    files: ["**/*.ts"],
-    parser: "typescript-eslint-parser",
-    rules: {
-      "no-undef": "off",
+  overrides: [
+    {
+      files: ['**/*.ts'],
+      parser: 'typescript-eslint-parser',
+      rules: {
+        'no-undef': 'off',
+      },
     },
-  },
+  ],
 };
