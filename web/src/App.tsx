@@ -8,7 +8,7 @@ import './index.scss';
 import Chessground from 'react-chessground';
 import 'react-chessground/dist/styles/chessground.css';
 import { Drawable } from 'chessground/draw';
-import openings from '../../server/src/openings';
+import openings from './openings';
 
 import back from './images/back.svg';
 import restart from './images/restart.svg';
