@@ -3,6 +3,7 @@ import { ChessInstance, Chess, Square, Move } from 'chess.js';
 import Chessground from 'react-chessground';
 import { Drawable } from 'chessground/draw';
 import * as React from 'react';
+import { useEffect } from 'react';
 import openings from '../../openings';
 import MoveBox from '../MoveBox';
 
@@ -65,7 +66,7 @@ const ChessDisplay = () => {
     return moveCards;
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCards(getCards());
   }, []);
 
