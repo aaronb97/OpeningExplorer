@@ -3,7 +3,7 @@ import { ChessInstance, Chess, Square, Move } from 'chess.js';
 import Chessground from 'react-chessground';
 import { Drawable } from 'chessground/draw';
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import openings from '../../openings';
 import MoveBox from '../MoveBox';
 
@@ -37,13 +37,13 @@ const getTrimmedFen = (fen: string) => {
 };
 
 const ChessDisplay = () => {
-  const [chess] = React.useState<ChessInstance>(new Chess());
-  const [fen, setFen] = React.useState('');
-  const [lastMove, setLastMove] = React.useState<Square[]>();
-  const [cards, setCards] = React.useState<MoveCard[]>([]);
-  const [currentOpeningName, setCurrentOpeningName] = React.useState('');
-  const [buttonsDisabled, setButtonsDisabled] = React.useState(true);
-  const [drawable, setDrawable] = React.useState<Drawable>({
+  const [chess] = useState<ChessInstance>(new Chess());
+  const [fen, setFen] = useState('');
+  const [lastMove, setLastMove] = useState<Square[]>();
+  const [cards, setCards] = useState<MoveCard[]>([]);
+  const [currentOpeningName, setCurrentOpeningName] = useState('');
+  const [buttonsDisabled, setButtonsDisabled] = useState(true);
+  const [drawable, setDrawable] = useState<Drawable>({
     ...baseDrawableArgs,
   });
 
