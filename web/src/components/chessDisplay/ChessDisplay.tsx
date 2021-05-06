@@ -4,6 +4,7 @@ import Chessground from 'react-chessground';
 import { Drawable } from 'chessground/draw';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import getOpenings from '../../services/apiService';
 import openings from '../../openings';
 import MoveBox from '../MoveBox';
 
@@ -26,9 +27,11 @@ const baseDrawableArgs: Drawable = {
   prevSvgHash: '',
 };
 
-interface MoveCard {
-  move: Move;
+export interface MoveCard {
   name: string;
+  san: string;
+  from: Square;
+  to: Square;
 }
 
 const getTrimmedFen = (fen: string) => {
@@ -47,42 +50,29 @@ const ChessDisplay = () => {
     ...baseDrawableArgs,
   });
 
-  const getCards = (): MoveCard[] => {
-    const moveCards: MoveCard[] = [];
-    chess.moves().forEach((move) => {
-      const possibleMove = chess.move(move);
-      const trimmedFen = getTrimmedFen(chess.fen());
-      const opening = openings[trimmedFen];
-      if (opening && possibleMove) {
-        moveCards.push({
-          move: possibleMove,
-          name: opening.name,
-        });
-      }
-
-      chess.undo();
-    });
-
-    return moveCards;
+  const retrieveOpenings = async (): Promise<MoveCard[]> => {
+    const response = await getOpenings(chess.fen());
+    setCards(response);
+    return response;
   };
-
-  useEffect(() => {
-    setCards(getCards());
-  }, []);
 
   const getCurrentOpeningName = (): string =>
     openings[getTrimmedFen(chess.fen())]?.name ?? ' ';
 
-  const setState = () => {
+  const setState = async () => {
     setDrawable({
       ...baseDrawableArgs,
       shapes: [],
       autoShapes: [],
     });
     setFen(chess.fen());
-    setCards(getCards());
+    await retrieveOpenings();
     setCurrentOpeningName(getCurrentOpeningName());
   };
+
+  useEffect(() => {
+    setState();
+  }, []);
 
   const onMove = (from: Square, to: Square) => {
     if (chess.move({ from, to })) {
@@ -132,7 +122,7 @@ const ChessDisplay = () => {
     setButtonsDisabled(true);
   };
 
-  const onCardMouseEnter = (move: Move) => {
+  const onCardMouseEnter = (move: MoveCard) => {
     setDrawable({
       ...baseDrawableArgs,
       autoShapes: [{ orig: move.from, dest: move.to, brush: 'green' }],
@@ -181,8 +171,7 @@ const ChessDisplay = () => {
           {cards.map((card) => (
             <MoveBox
               key={card.name}
-              name={card.name}
-              move={card.move}
+              card={card}
               onMouseEnter={onCardMouseEnter}
             />
           ))}

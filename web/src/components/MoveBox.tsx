@@ -1,18 +1,17 @@
-import { Move } from 'chess.js';
 import React from 'react';
+import { MoveCard } from './chessDisplay/ChessDisplay';
 
 interface MoveBoxProps {
-  name: string;
-  move: Move;
-  onMouseEnter: (move: Move) => void;
+  card: MoveCard;
+  onMouseEnter: (move: MoveCard) => void;
 }
 
-const MoveBox = ({ name, move, onMouseEnter }: MoveBoxProps) => (
-  <div className="move-box" onMouseEnter={() => onMouseEnter(move)}>
-    <div>{name}</div>
+const MoveBox = ({ card, onMouseEnter }: MoveBoxProps) => (
+  <div className="move-box" onMouseEnter={() => onMouseEnter(card)}>
+    <div>{card.name}</div>
     <div>
       <b>Move: </b>
-      {move.san}
+      {card.san}
     </div>
   </div>
 );

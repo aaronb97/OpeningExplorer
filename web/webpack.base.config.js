@@ -1,14 +1,14 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    filename: "bundle.[hash].js",
-    path: path.join(__dirname, "/dist"),
+    filename: 'bundle.[hash].js',
+    path: path.join(__dirname, '/dist'),
   },
   resolve: {
-    extensions: [".js", ".ts", ".tsx"],
+    extensions: ['.js', '.ts', '.tsx'],
   },
   module: {
     rules: [
@@ -16,22 +16,22 @@ module.exports = {
         test: /\.(css|scss)$/,
         use: [
           {
-            loader: "style-loader", // inject CSS to page
+            loader: 'style-loader', // inject CSS to page
           },
           {
-            loader: "css-loader", // translates CSS into CommonJS modules
+            loader: 'css-loader', // translates CSS into CommonJS modules
           },
           {
-            loader: "postcss-loader", // Run post css actions
+            loader: 'postcss-loader', // Run post css actions
             options: {
-              plugins: function () {
+              plugins() {
                 // post css plugins, can be exported to postcss.config.js
-                return [require("precss"), require("autoprefixer")];
+                return [require('precss'), require('autoprefixer')];
               },
             },
           },
           {
-            loader: "sass-loader", // compiles Sass to CSS
+            loader: 'sass-loader', // compiles Sass to CSS
           },
         ],
       },
@@ -40,16 +40,17 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
               presets: [
-                "@babel/preset-env",
-                "@babel/preset-react",
-                "@babel/preset-typescript",
+                '@babel/preset-env',
+                '@babel/preset-react',
+                '@babel/preset-typescript',
               ],
               plugins: [
-                ["@babel/plugin-proposal-class-properties"],
-                ["import", { libraryName: "antd", style: "css" }],
+                ['@babel/plugin-proposal-class-properties'],
+                ['@babel/plugin-transform-runtime'],
+                ['import', { libraryName: 'antd', style: 'css' }],
               ],
             },
           },
@@ -57,7 +58,7 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ["file-loader"],
+        use: ['file-loader'],
       },
       {
         test: /chess.js/,
@@ -69,7 +70,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
     }),
   ],
 };

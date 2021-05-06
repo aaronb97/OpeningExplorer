@@ -13,6 +13,24 @@ app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(function (req, res, next) {
+  //to allow cross domain requests to send cookie information.
+  res.header("Access-Control-Allow-Credentials", "true");
+
+  // origin can not be '*' when crendentials are enabled. so need to set it to the request origin
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+
+  // list of methods that are supported by the server
+  res.header("Access-Control-Allow-Methods", "OPTIONS,GET,PUT,POST,DELETE");
+
+  res.header(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, X-XSRF-TOKEN"
+  );
+
+  next();
+});
+
 const getTrimmedFen = (fen: string) => {
   const splitFen = fen.split(" ");
   return `${splitFen[0]} ${splitFen[1]} ${splitFen[2]}`;
@@ -21,11 +39,13 @@ const getTrimmedFen = (fen: string) => {
 interface Move {
   san: string;
   name: string;
+  to: string;
+  from: string;
 }
 
-app.get("/openings", async (req, res) => {
+app.get("/openings/:fen", async (req, res) => {
   try {
-    const chess = new Chess(req.body.fen);
+    const chess = new Chess(req.params.fen);
 
     const moves: Move[] = [];
     chess.moves().forEach((move) => {
@@ -35,6 +55,8 @@ app.get("/openings", async (req, res) => {
       if (opening && possibleMove) {
         moves.push({
           san: possibleMove.san,
+          from: possibleMove.from,
+          to: possibleMove.to,
           name: opening.name,
         });
       }
