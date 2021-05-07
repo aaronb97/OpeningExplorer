@@ -23,7 +23,8 @@
     "webpack-merge": "^5.7.3"
   },
   "scripts": {
-    "start": "webpack serve --open --config webpack.dev.config.js",
+    "start": "webpack serve --open --config webpack.prod.config.js",
+    "start:dev": "webpack serve --open --config webpack.dev.config.js",
     "build": "webpack --config webpack.prod.config.js"
   },
   "devDependencies": {
