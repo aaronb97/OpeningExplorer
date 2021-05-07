@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+const baseURL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://opening-explorer-backend.herokuapp.com/'
+    : 'http://localhost:3001/';
+
 const instance = axios.create({
-  baseURL: 'http://localhost:3001/',
+  baseURL,
   withCredentials: true,
 });
 
