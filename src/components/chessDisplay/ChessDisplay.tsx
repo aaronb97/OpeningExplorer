@@ -1,4 +1,4 @@
-import { ChessInstance, Chess, Square, Move } from 'chess.js';
+import { ChessInstance, Chess, Square } from 'chess.js';
 // @ts-ignore
 import Chessground from 'react-chessground';
 import { Drawable } from 'chessground/draw';
