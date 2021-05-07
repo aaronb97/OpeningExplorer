@@ -5,7 +5,6 @@ import { Drawable } from 'chessground/draw';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import getOpenings from '../../services/apiService';
-import openings from '../../openings';
 import MoveBox from '../MoveBox';
 
 import back from '../../images/back.svg';
@@ -34,11 +33,6 @@ export interface MoveCard {
   to: Square;
 }
 
-const getTrimmedFen = (fen: string) => {
-  const splitFen = fen.split(' ');
-  return `${splitFen[0]} ${splitFen[1]} ${splitFen[2]}`;
-};
-
 const ChessDisplay = () => {
   const [chess] = useState<ChessInstance>(new Chess());
   const [fen, setFen] = useState('');
@@ -50,14 +44,12 @@ const ChessDisplay = () => {
     ...baseDrawableArgs,
   });
 
-  const retrieveOpenings = async (): Promise<MoveCard[]> => {
+  const retrieveOpenings = async (): Promise<any> => {
     const response = await getOpenings(chess.fen());
-    setCards(response);
+    setCards(response.moves);
+    setCurrentOpeningName(response.currentOpeningName);
     return response;
   };
-
-  const getCurrentOpeningName = (): string =>
-    openings[getTrimmedFen(chess.fen())]?.name ?? ' ';
 
   const setState = async () => {
     setDrawable({
@@ -67,7 +59,6 @@ const ChessDisplay = () => {
     });
     setFen(chess.fen());
     await retrieveOpenings();
-    setCurrentOpeningName(getCurrentOpeningName());
   };
 
   useEffect(() => {
