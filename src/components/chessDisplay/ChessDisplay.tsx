@@ -35,7 +35,6 @@ export interface MoveCard {
 
 const ChessDisplay = () => {
   const [chess] = useState<ChessInstance>(new Chess());
-  const [fen, setFen] = useState('');
   const [lastMove, setLastMove] = useState<Square[]>();
   const [cards, setCards] = useState<MoveCard[]>([]);
   const [currentOpeningName, setCurrentOpeningName] = useState('');
@@ -57,7 +56,6 @@ const ChessDisplay = () => {
       shapes: [],
       autoShapes: [],
     });
-    setFen(chess.fen());
     await retrieveOpenings();
   };
 
@@ -128,7 +126,7 @@ const ChessDisplay = () => {
           turnColor={turnColor()}
           movable={calcMovable()}
           lastMove={lastMove}
-          fen={fen}
+          fen={chess.fen()}
           onMove={onMove}
           style={{
             margin: 'auto',
