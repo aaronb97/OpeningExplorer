@@ -23,15 +23,9 @@ const MoveBoxContainer = ({
 
   return (
     <div className="move-box-container">
-      <div>
-        {cards.map((card) => (
-          <MoveBox
-            key={card.name}
-            card={card}
-            onMouseEnter={onCardMouseEnter}
-          />
-        ))}
-      </div>
+      {cards.map((card) => (
+        <MoveBox key={card.name} card={card} onMouseEnter={onCardMouseEnter} />
+      ))}
     </div>
   );
 };
