@@ -5,12 +5,12 @@ import { Drawable } from 'chessground/draw';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import getOpenings from '../../services/apiService';
-import MoveBox from '../MoveBox';
 
 import back from '../../images/back.svg';
 import restart from '../../images/restart.svg';
 
 import 'react-chessground/dist/styles/chessground.css';
+import MoveBoxContainer from '../moveBoxContainer/moveBoxContainer';
 
 const startingFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
@@ -42,11 +42,14 @@ const ChessDisplay = () => {
   const [drawable, setDrawable] = useState<Drawable>({
     ...baseDrawableArgs,
   });
+  const [isLoadingOpenings, setIsLoadingOpenings] = useState(false);
 
   const retrieveOpenings = async (): Promise<any> => {
+    setIsLoadingOpenings(true);
     const response = await getOpenings(chess.fen());
     setCards(response.moves);
     setCurrentOpeningName(response.currentOpeningName);
+    setIsLoadingOpenings(false);
     return response;
   };
 
@@ -155,17 +158,11 @@ const ChessDisplay = () => {
           </button>
         </div>
       </div>
-      <div className="move-box-container">
-        <div>
-          {cards.map((card) => (
-            <MoveBox
-              key={card.name}
-              card={card}
-              onMouseEnter={onCardMouseEnter}
-            />
-          ))}
-        </div>
-      </div>
+      <MoveBoxContainer
+        cards={cards}
+        onCardMouseEnter={onCardMouseEnter}
+        isLoadingOpenings={isLoadingOpenings}
+      />
     </div>
   );
 };
