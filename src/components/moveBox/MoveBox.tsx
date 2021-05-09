@@ -1,5 +1,6 @@
 import React from 'react';
 import { MoveCard } from '../chessDisplay/ChessDisplay';
+import './moveBox.scss';
 
 interface MoveBoxProps {
   card: MoveCard;
