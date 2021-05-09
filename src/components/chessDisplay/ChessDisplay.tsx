@@ -43,14 +43,20 @@ const ChessDisplay = () => {
     ...baseDrawableArgs,
   });
   const [isLoadingOpenings, setIsLoadingOpenings] = useState(false);
+  const [didOpeningsLoadFail, setDidOpeningsLoadFail] = useState(false);
 
-  const retrieveOpenings = async (): Promise<any> => {
+  const retrieveOpenings = async (): Promise<void> => {
     setIsLoadingOpenings(true);
-    const response = await getOpenings(chess.fen());
-    setCards(response.moves);
-    setCurrentOpeningName(response.currentOpeningName);
-    setIsLoadingOpenings(false);
-    return response;
+    try {
+      setDidOpeningsLoadFail(false);
+
+      const response = await getOpenings(chess.fen());
+      setCards(response.moves);
+      setCurrentOpeningName(response.currentOpeningName);
+      setIsLoadingOpenings(false);
+    } catch {
+      setDidOpeningsLoadFail(true);
+    }
   };
 
   const setState = async () => {
@@ -59,7 +65,7 @@ const ChessDisplay = () => {
       shapes: [],
       autoShapes: [],
     });
-    await retrieveOpenings();
+    retrieveOpenings();
   };
 
   useEffect(() => {
@@ -162,6 +168,7 @@ const ChessDisplay = () => {
         cards={cards}
         onCardMouseEnter={onCardMouseEnter}
         isLoadingOpenings={isLoadingOpenings}
+        didOpeningsLoadFail={didOpeningsLoadFail}
       />
     </div>
   );

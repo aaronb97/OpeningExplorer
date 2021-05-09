@@ -9,13 +9,24 @@ interface MoveBoxContainerProps {
   cards: MoveCard[];
   onCardMouseEnter: (move: MoveCard) => void;
   isLoadingOpenings: boolean;
+  didOpeningsLoadFail: boolean;
 }
 
 const MoveBoxContainer = ({
   cards,
   onCardMouseEnter,
   isLoadingOpenings,
+  didOpeningsLoadFail,
 }: MoveBoxContainerProps) => {
+  if (didOpeningsLoadFail) {
+    return (
+      <div className="notification">
+        <div>Loading of openings failed!</div>
+        <div>:(</div>
+      </div>
+    );
+  }
+
   if (!isLoadingOpenings && !cards.length) {
     return (
       <div className="notification">No known openings from this position!</div>
