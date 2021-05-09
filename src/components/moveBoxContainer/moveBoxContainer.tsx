@@ -6,8 +6,7 @@ import MoveBox from '../moveBox/MoveBox';
 import './moveBoxContainer.scss';
 
 const defaultLoadingText = 'Loading openings...';
-const waitingLoadingText =
-  "Loading openings may take a few moments if the website hasn't been visited in a while...";
+const waitingLoadingText = 'Loading openings may take a few moments...';
 
 interface MoveBoxContainerProps {
   cards: MoveCard[];
