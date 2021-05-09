@@ -12,7 +12,7 @@ const App = () => (
     <Router>
       <CustomNavBar />
       <Switch>
-        <Route path="/about">
+        <Route path="/about/">
           <About />
         </Route>
         <Route path="/">
