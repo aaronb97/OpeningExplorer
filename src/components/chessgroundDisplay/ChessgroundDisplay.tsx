@@ -69,22 +69,27 @@ const ChessgroundDisplay = (props: ChessgroundProps) => {
   const [cg, setCg] = useState<Api>();
   const [element, setElement] = useState<HTMLDivElement | null>();
 
+  const { style, width, height, drawable } = props;
+
   useEffect(() => {
     if (element) {
       setCg(Chessground(element, buildConfigFromProps(props)));
     }
-  }, [element]);
+  }, [element, drawable]);
 
   cg?.set(buildConfigFromProps(props));
-
-  const { style, width, height } = props;
 
   const styleProps = { style: { ...style } };
   if (width) {
     styleProps.style.width = props.width;
   }
+
   if (height) {
     styleProps.style.height = props.height;
+  }
+
+  if (drawable.autoShapes) {
+    cg?.setAutoShapes(drawable.autoShapes);
   }
 
   return (
