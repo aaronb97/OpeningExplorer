@@ -1,6 +1,6 @@
 import React from 'react';
 import { MoveCard } from '../chessDisplay/ChessDisplay';
-import MoveBox from '../MoveBox';
+import MoveBox from '../moveBox/MoveBox';
 import LoadingOverlay from 'react-loading-overlay';
 
 import './moveBoxContainer.scss';
