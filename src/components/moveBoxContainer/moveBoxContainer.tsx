@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import LoadingOverlay from 'react-loading-overlay';
+import LoadingOverlay from 'react-loading-overlay-ts';
 import { MoveCard } from '../chessDisplay/ChessDisplay';
 import MoveBox from '../moveBox/MoveBox';
 
