@@ -6,11 +6,9 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import getOpenings from '../../services/apiService';
 
-import back from '../../images/back.svg';
-import restart from '../../images/restart.svg';
-
 import 'react-chessground/dist/styles/chessground.css';
 import MoveBoxContainer from '../moveBoxContainer/moveBoxContainer';
+import ButtonsDisplay from '../buttonsDisplay/ButtonsDisplay';
 
 const startingFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
@@ -147,22 +145,11 @@ const ChessDisplay = () => {
           drawable={drawable}
         />
         <div className="opening-name">{currentOpeningName}</div>
-        <div className="buttons">
-          <button
-            type="button"
-            onClick={onResetClick}
-            disabled={buttonsDisabled}
-          >
-            <img className="nav-button" src={restart} alt="Reset" />
-          </button>
-          <button
-            type="button"
-            onClick={onBackClick}
-            disabled={buttonsDisabled}
-          >
-            <img className="nav-button" src={back} alt="Back" />
-          </button>
-        </div>
+        <ButtonsDisplay
+          onResetClick={onResetClick}
+          onBackClick={onBackClick}
+          buttonsDisabled={buttonsDisabled}
+        />
       </div>
       <MoveBoxContainer
         cards={cards}

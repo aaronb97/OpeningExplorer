@@ -1,0 +1,28 @@
+.nav-button {
+  width: 4vmin;
+  height: 4vmin;
+  padding: 2%;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  background-color: white;
+  margin-left: 1vmin;
+  margin-right: 1vmin;
+  transition: background-color 0.5s;
+}
+
+button:hover {
+  background-color: #dddddd;
+}
+
+button[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed !important;
+  background-color: white;
+}
