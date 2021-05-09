@@ -1,14 +1,12 @@
 import { ChessInstance, Chess, Square } from 'chess.js';
-// @ts-ignore
-import Chessground from 'react-chessground';
 import { Drawable } from 'chessground/draw';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import getOpenings from '../../services/apiService';
 
-import 'react-chessground/dist/styles/chessground.css';
 import MoveBoxContainer from '../moveBoxContainer/moveBoxContainer';
 import ButtonsDisplay from '../buttonsDisplay/ButtonsDisplay';
+import ChessgroundDisplay from '../chessgroundDisplay/ChessgroundDisplay';
 
 const startingFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
@@ -129,7 +127,7 @@ const ChessDisplay = () => {
     <div className="grid-container">
       <div />
       <div>
-        <Chessground
+        <ChessgroundDisplay
           turnColor={turnColor()}
           movable={calcMovable()}
           lastMove={lastMove}
@@ -137,12 +135,12 @@ const ChessDisplay = () => {
           onMove={onMove}
           style={{
             margin: 'auto',
-            width: 'calc(85vmin - 80px)',
             minWidth: '300px',
             minHeight: '300px',
-            height: 'calc(85vmin - 80px)',
           }}
           drawable={drawable}
+          width="calc(85vmin - 80px)"
+          height="calc(85vmin - 80px)"
         />
         <div className="opening-name">{currentOpeningName}</div>
         <ButtonsDisplay
