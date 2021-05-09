@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import LoadingOverlay from 'react-loading-overlay';
 import { MoveCard } from '../chessDisplay/ChessDisplay';
 import MoveBox from '../moveBox/MoveBox';
-import LoadingOverlay from 'react-loading-overlay';
 
 import './moveBoxContainer.scss';
 
@@ -55,7 +55,11 @@ const MoveBoxContainer = ({
       className="move-box-container"
     >
       {cards.map((card) => (
-        <MoveBox key={card.name} card={card} onMouseEnter={onCardMouseEnter} />
+        <MoveBox
+          key={`${card.name}${card.san}`}
+          card={card}
+          onMouseEnter={onCardMouseEnter}
+        />
       ))}
     </LoadingOverlay>
   );
