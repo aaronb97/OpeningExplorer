@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MoveCard } from '../chessDisplay/ChessDisplay';
 import MoveBox from '../moveBox/MoveBox';
 import LoadingOverlay from 'react-loading-overlay';
 
 import './moveBoxContainer.scss';
+
+const defaultLoadingText = 'Loading openings...';
+const waitingLoadingText =
+  "Loading openings may take a few moments if the website hasn't been visited in a while...";
 
 interface MoveBoxContainerProps {
   cards: MoveCard[];
@@ -18,6 +22,16 @@ const MoveBoxContainer = ({
   isLoadingOpenings,
   didOpeningsLoadFail,
 }: MoveBoxContainerProps) => {
+  const [loadingText, setLoadingText] = useState(defaultLoadingText);
+
+  useEffect(() => {
+    if (isLoadingOpenings) {
+      setLoadingText(defaultLoadingText);
+    }
+
+    setTimeout(() => setLoadingText(waitingLoadingText), 3000);
+  }, [isLoadingOpenings]);
+
   if (didOpeningsLoadFail) {
     return (
       <div className="notification">
@@ -37,7 +51,7 @@ const MoveBoxContainer = ({
     <LoadingOverlay
       active={isLoadingOpenings}
       spinner
-      text="Loading openings..."
+      text={loadingText}
       className="move-box-container"
     >
       {cards.map((card) => (
