@@ -18,6 +18,7 @@ const About = () => (
     <p>
       Todo:
       <ul>
+        <li>Implement display with historical context and strategies</li>
         <li>Implement toggleable dark mode</li>
         <li>
           Implement caching mechanism so reloading previously fetched positions
