@@ -1,6 +1,9 @@
 import React from 'react';
 import { MoveCard } from '../chessDisplay/ChessDisplay';
 import MoveBox from '../MoveBox';
+import LoadingOverlay from 'react-loading-overlay';
+
+import './moveBoxContainer.scss';
 
 interface MoveBoxContainerProps {
   cards: MoveCard[];
@@ -13,20 +16,23 @@ const MoveBoxContainer = ({
   onCardMouseEnter,
   isLoadingOpenings,
 }: MoveBoxContainerProps) => {
-  if (isLoadingOpenings) {
-    return <div>Loading openings...</div>;
-  }
-
-  if (!cards.length) {
-    return <div>No known openings from this position!</div>;
+  if (!isLoadingOpenings && !cards.length) {
+    return (
+      <div className="notification">No known openings from this position!</div>
+    );
   }
 
   return (
-    <div className="move-box-container">
+    <LoadingOverlay
+      active={isLoadingOpenings}
+      spinner
+      text="Loading openings..."
+      className="move-box-container"
+    >
       {cards.map((card) => (
         <MoveBox key={card.name} card={card} onMouseEnter={onCardMouseEnter} />
       ))}
-    </div>
+    </LoadingOverlay>
   );
 };
 
