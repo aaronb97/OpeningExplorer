@@ -22,9 +22,6 @@ module.exports = {
             loader: 'css-loader', // translates CSS into CommonJS modules
           },
           {
-            loader: 'postcss-loader', // Run post css actions
-          },
-          {
             loader: 'sass-loader', // compiles Sass to CSS
           },
         ],
