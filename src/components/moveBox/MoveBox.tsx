@@ -5,16 +5,22 @@ import './moveBox.scss';
 interface MoveBoxProps {
   card: MoveCard;
   onMouseEnter: (move: MoveCard) => void;
+  onClick: (move: MoveCard) => void;
 }
 
-const MoveBox = ({ card, onMouseEnter }: MoveBoxProps) => (
-  <div className="move-box" onMouseEnter={() => onMouseEnter(card)}>
+const MoveBox = ({ card, onMouseEnter, onClick }: MoveBoxProps) => (
+  <button
+    className="move-box"
+    onMouseEnter={() => onMouseEnter(card)}
+    onClick={() => onClick(card)}
+    type="button"
+  >
     <div>{card.name}</div>
     <div>
       <b>Move: </b>
       {card.san}
     </div>
-  </div>
+  </button>
 );
 
 export default MoveBox;

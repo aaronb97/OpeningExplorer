@@ -76,6 +76,10 @@ const ChessDisplay = () => {
     }
   };
 
+  const onClickCard = (card: MoveCard) => {
+    onMove(card.from, card.to);
+  };
+
   const turnColor = () => (chess.turn() === 'w' ? 'white' : 'black');
 
   const calcMovable = () => {
@@ -152,6 +156,7 @@ const ChessDisplay = () => {
       <MoveBoxContainer
         cards={cards}
         onCardMouseEnter={onCardMouseEnter}
+        onClickCard={onClickCard}
         isLoadingOpenings={isLoadingOpenings}
         didOpeningsLoadFail={didOpeningsLoadFail}
       />

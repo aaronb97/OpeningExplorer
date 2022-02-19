@@ -11,6 +11,7 @@ const waitingLoadingText = 'Loading openings may take a few moments...';
 interface MoveBoxContainerProps {
   cards: MoveCard[];
   onCardMouseEnter: (move: MoveCard) => void;
+  onClickCard: (move: MoveCard) => void;
   isLoadingOpenings: boolean;
   didOpeningsLoadFail: boolean;
 }
@@ -20,6 +21,7 @@ const MoveBoxContainer = ({
   onCardMouseEnter,
   isLoadingOpenings,
   didOpeningsLoadFail,
+  onClickCard,
 }: MoveBoxContainerProps) => {
   const [loadingText, setLoadingText] = useState(defaultLoadingText);
 
@@ -58,6 +60,7 @@ const MoveBoxContainer = ({
           key={`${card.name}${card.san}`}
           card={card}
           onMouseEnter={onCardMouseEnter}
+          onClick={onClickCard}
         />
       ))}
     </LoadingOverlay>
