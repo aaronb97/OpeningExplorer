@@ -14,6 +14,7 @@ const MoveBox = ({ card, onMouseEnter, onClick }: MoveBoxProps) => (
     onMouseEnter={() => onMouseEnter(card)}
     onClick={() => onClick(card)}
     type="button"
+    disabled={card.hidden}
   >
     <div>{card.name}</div>
     <div>

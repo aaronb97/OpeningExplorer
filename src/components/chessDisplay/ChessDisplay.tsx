@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-plusplus */
 import { ChessInstance, Chess, Square } from 'chess.js';
 import { Drawable } from 'chessground/draw';
 import * as React from 'react';
@@ -28,12 +30,13 @@ export interface MoveCard {
   from?: Square;
   to?: Square;
   hidden?: boolean;
+  key: number;
 }
 
 const ChessDisplay = () => {
   const [chess] = useState<ChessInstance>(new Chess());
   const [lastMove, setLastMove] = useState<Square[]>();
-  const [cards, setCards] = useState<MoveCard[]>([...Array(24)]);
+  const [cards, setCards] = useState<MoveCard[]>([...Array(50)]);
   const [currentOpeningName, setCurrentOpeningName] = useState('');
   const [buttonsDisabled, setButtonsDisabled] = useState(true);
   const [drawable, setDrawable] = useState<Drawable>({
@@ -50,15 +53,25 @@ const ChessDisplay = () => {
       const response = await getOpenings(chess.fen());
       cards.forEach((_, i) => {
         if (!cards[i]) {
-          cards[i] = {};
+          cards[i] = {
+            key: Math.random(),
+          };
         }
-        if (response.moves[i]) {
-          cards[i] = response.moves[i];
-          cards[i].hidden = false;
-        } else {
+
+        if (!cards[i].hidden) {
           cards[i].hidden = true;
         }
       });
+
+      response.moves.forEach((move, i) => {
+        cards[i] = { ...move, key: cards[i].key };
+      });
+
+      for (let i = 0; i < 25; i++) {
+        cards.unshift({ key: Math.random(), hidden: true });
+      }
+
+      cards.length = 100;
 
       setCards(cards);
       setCurrentOpeningName(response.currentOpeningName);

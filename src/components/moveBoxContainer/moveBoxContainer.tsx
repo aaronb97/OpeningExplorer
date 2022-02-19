@@ -56,23 +56,16 @@ const MoveBoxContainer = ({
       text={loadingText}
       className="move-box-container"
     >
-      {/* {cards.map((card) => (
-        <MoveBox
-          key={`${card.name}${card.san}`}
-          card={card}
-          onMouseEnter={onCardMouseEnter}
-          onClick={onClickCard}
-        />
-      ))} */}
-      {[...Array(24)].map((_, i) => (
+      {[...Array(100)].map((_, i) => (
         <AnimateHeight
           id="example-panel"
-          duration={500}
-          height={!cards[i]?.hidden ? 'auto' : 0} // see props documentation below
+          key={`${cards[i]?.key}`}
+          duration={1000 + Math.random() * 10}
+          easing="ease-in-out"
+          height={cards[i]?.hidden === true ? 0 : 'auto'} // see props documentation below
         >
           {cards[i] ? (
             <MoveBox
-              key={`${cards[i].name}${cards[i].san}`}
               card={cards[i]}
               onMouseEnter={onCardMouseEnter}
               onClick={onClickCard}
