@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import AnimateHeight from 'react-animate-height';
 import LoadingOverlay from 'react-loading-overlay-ts';
 import { MoveCard } from '../chessDisplay/ChessDisplay';
 import MoveBox from '../moveBox/MoveBox';
@@ -55,13 +56,29 @@ const MoveBoxContainer = ({
       text={loadingText}
       className="move-box-container"
     >
-      {cards.map((card) => (
+      {/* {cards.map((card) => (
         <MoveBox
           key={`${card.name}${card.san}`}
           card={card}
           onMouseEnter={onCardMouseEnter}
           onClick={onClickCard}
         />
+      ))} */}
+      {[...Array(24)].map((_, i) => (
+        <AnimateHeight
+          id="example-panel"
+          duration={500}
+          height={!cards[i]?.hidden ? 'auto' : 0} // see props documentation below
+        >
+          {cards[i] ? (
+            <MoveBox
+              key={`${cards[i].name}${cards[i].san}`}
+              card={cards[i]}
+              onMouseEnter={onCardMouseEnter}
+              onClick={onClickCard}
+            />
+          ) : null}
+        </AnimateHeight>
       ))}
     </LoadingOverlay>
   );

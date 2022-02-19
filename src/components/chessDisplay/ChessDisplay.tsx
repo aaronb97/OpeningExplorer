@@ -23,16 +23,17 @@ const baseDrawableArgs: Drawable = {
 };
 
 export interface MoveCard {
-  name: string;
-  san: string;
-  from: Square;
-  to: Square;
+  name?: string;
+  san?: string;
+  from?: Square;
+  to?: Square;
+  hidden?: boolean;
 }
 
 const ChessDisplay = () => {
   const [chess] = useState<ChessInstance>(new Chess());
   const [lastMove, setLastMove] = useState<Square[]>();
-  const [cards, setCards] = useState<MoveCard[]>([]);
+  const [cards, setCards] = useState<MoveCard[]>([...Array(24)]);
   const [currentOpeningName, setCurrentOpeningName] = useState('');
   const [buttonsDisabled, setButtonsDisabled] = useState(true);
   const [drawable, setDrawable] = useState<Drawable>({
@@ -47,7 +48,19 @@ const ChessDisplay = () => {
       setDidOpeningsLoadFail(false);
 
       const response = await getOpenings(chess.fen());
-      setCards(response.moves);
+      cards.forEach((_, i) => {
+        if (!cards[i]) {
+          cards[i] = {};
+        }
+        if (response.moves[i]) {
+          cards[i] = response.moves[i];
+          cards[i].hidden = false;
+        } else {
+          cards[i].hidden = true;
+        }
+      });
+
+      setCards(cards);
       setCurrentOpeningName(response.currentOpeningName);
       setIsLoadingOpenings(false);
     } catch {
