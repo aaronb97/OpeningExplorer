@@ -7,6 +7,7 @@ import getOpenings from '../../services/apiService';
 import MoveBoxContainer from '../moveBoxContainer/moveBoxContainer';
 import ButtonsDisplay from '../buttonsDisplay/ButtonsDisplay';
 import ChessgroundDisplay from '../chessgroundDisplay/ChessgroundDisplay';
+import InfoDisplay from '../InfoDisplay/InfoDisplay';
 
 const startingFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
@@ -129,7 +130,7 @@ const ChessDisplay = () => {
 
   return (
     <div className="grid-container">
-      <div />
+      <InfoDisplay name={currentOpeningName} />
       <div>
         <ChessgroundDisplay
           turnColor={turnColor()}
