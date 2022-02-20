@@ -28,6 +28,7 @@ export interface MoveCard {
   san: string;
   from: Square;
   to: Square;
+  hasInfo: boolean;
 }
 
 const ChessDisplay = () => {

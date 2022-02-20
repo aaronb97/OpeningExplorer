@@ -16,9 +16,16 @@ const MoveBox = ({ card, onMouseEnter, onClick }: MoveBoxProps) => (
     type="button"
   >
     <div>{card.name}</div>
-    <div>
-      <b>Move: </b>
-      {card.san}
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div>
+        <b>Move: </b>
+        {card.san}
+      </div>
+      {card.hasInfo ? (
+        <span className="material-icons" title="has info">
+          feed
+        </span>
+      ) : null}
     </div>
   </button>
 );
