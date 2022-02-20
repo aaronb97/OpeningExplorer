@@ -130,8 +130,7 @@ const ChessDisplay = () => {
 
   return (
     <div className="grid-container">
-      <InfoDisplay name={currentOpeningName} />
-      <div>
+      <div className="chess-container">
         <ChessgroundDisplay
           turnColor={turnColor()}
           movable={calcMovable()}
@@ -139,30 +138,31 @@ const ChessDisplay = () => {
           fen={chess.fen()}
           onMove={onMove}
           style={{
-            margin: 'auto',
-            minWidth: '300px',
-            minHeight: '300px',
             boxShadow:
               '0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+            maxWidth: '700px',
+            maxHeight: '700px',
           }}
           drawable={drawable}
           width="calc(85vmin - 80px)"
           height="calc(85vmin - 80px)"
         />
-        <div className="opening-name">{currentOpeningName}</div>
         <ButtonsDisplay
           onResetClick={onResetClick}
           onBackClick={onBackClick}
           buttonsDisabled={buttonsDisabled}
         />
       </div>
-      <MoveBoxContainer
-        cards={cards}
-        onCardMouseEnter={onCardMouseEnter}
-        onClickCard={onClickCard}
-        isLoadingOpenings={isLoadingOpenings}
-        didOpeningsLoadFail={didOpeningsLoadFail}
-      />
+      <div className="cards-display">
+        <InfoDisplay name={currentOpeningName} />
+        <MoveBoxContainer
+          cards={cards}
+          onCardMouseEnter={onCardMouseEnter}
+          onClickCard={onClickCard}
+          isLoadingOpenings={isLoadingOpenings}
+          didOpeningsLoadFail={didOpeningsLoadFail}
+        />
+      </div>
     </div>
   );
 };
