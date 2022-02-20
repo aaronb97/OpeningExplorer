@@ -2,10 +2,11 @@ import * as React from 'react';
 import './InfoDisplay.scss';
 
 interface Props {
-  name: string;
+  name?: string;
+  info?: string[];
 }
 
-const InfoDisplay = ({ name }: Props) => {
+const InfoDisplay = ({ name, info }: Props) => {
   if (!name) {
     return null;
   }
@@ -13,7 +14,9 @@ const InfoDisplay = ({ name }: Props) => {
   return (
     <div className="info-display">
       <h2>{name}</h2>
-      <div>No info about this opening yet!</div>
+      {info?.map((infoLine) => (
+        <p key={infoLine}>{infoLine}</p>
+      ))}
     </div>
   );
 };

@@ -34,7 +34,10 @@ const ChessDisplay = () => {
   const [chess] = useState<ChessInstance>(new Chess());
   const [lastMove, setLastMove] = useState<Square[]>();
   const [cards, setCards] = useState<MoveCard[]>([]);
-  const [currentOpeningName, setCurrentOpeningName] = useState('');
+  const [currentOpening, setCurrentOpening] = useState<{
+    name?: string;
+    info?: string[];
+  }>({});
   const [buttonsDisabled, setButtonsDisabled] = useState(true);
   const [drawable, setDrawable] = useState<Drawable>({
     ...baseDrawableArgs,
@@ -49,7 +52,10 @@ const ChessDisplay = () => {
 
       const response = await getOpenings(chess.fen());
       setCards(response.moves);
-      setCurrentOpeningName(response.currentOpeningName);
+      setCurrentOpening({
+        name: response.currentOpeningName,
+        info: response.currentOpeningInfo,
+      });
       setIsLoadingOpenings(false);
     } catch {
       setDidOpeningsLoadFail(true);
@@ -154,7 +160,7 @@ const ChessDisplay = () => {
         />
       </div>
       <div className="cards-display">
-        <InfoDisplay name={currentOpeningName} />
+        <InfoDisplay name={currentOpening.name} info={currentOpening.info} />
         <MoveBoxContainer
           cards={cards}
           onCardMouseEnter={onCardMouseEnter}
